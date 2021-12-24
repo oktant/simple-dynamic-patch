@@ -1,7 +1,7 @@
 package patchlibrary;
 
 
-public class User {
+public class User  extends ParentClass{
     private String id;
     private String lastName;
     private String name;

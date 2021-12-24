@@ -15,7 +15,7 @@ public class PatchMap {
     public static Object patch(Map<String,Object> user, Object current) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         for (Map.Entry<String, Object> entry : user.entrySet()) {
             Method sumInstanceMethod
-                    = current.getClass().getDeclaredMethod("set"+
+                    = current.getClass().getMethod("set"+
                     StringUtils.capitalize(entry.getKey()), getTypeClass(entry.getValue()));
 
             sumInstanceMethod.invoke(current, entry.getValue());

@@ -1,35 +1,47 @@
 package patchlibrary;
 
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PatchMapTest{
+public class PatchMapTest {
 
 
-@Test
-public void   patchTest() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    User user=new User();
-    user.setAge(20);
-    user.setId("1");
-    user.setLastName("testLastName");
-    user.setName("fsafsafsdf");
-    Map<String, Object> mapObject=new HashMap<String, Object>();
-    mapObject.put("id", "dasdasd");
-    mapObject.put("name", "dasdasd");
-    mapObject.put("age", 40);
-    mapObject.put("ssn", 1L);
-    mapObject.put("gender", (byte)0);
-    mapObject.put("shortVariable", (short)2);
-    mapObject.put("height", 2.0);
-    mapObject.put("testChar", 'c');
-    mapObject.put("weight", 1f);
-    mapObject.put("active", true);
-    PatchMap.patch(mapObject, user);
-}
+    @Test
+    public void patchTest() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        User user = new User();
+        user.setAge(20);
+        user.setId("1");
+        user.setLastName("testLastName");
+        user.setName("fsafsafsdf");
+        Map<String, Object> mapObject = new HashMap<String, Object>();
+        mapObject.put("id", "dasdasd");
+        mapObject.put("name", "dasdasd");
+        mapObject.put("age", 40);
+        mapObject.put("ssn", 1L);
+        mapObject.put("gender", (byte) 0);
+        mapObject.put("shortVariable", (short) 2);
+        mapObject.put("height", 2.0);
+        mapObject.put("testChar", 'c');
+        mapObject.put("weight", 1f);
+        mapObject.put("active", true);
+        PatchMap.patch(mapObject, user);
+    }
 
+    @Test
+    public void patchTestParentClassMethod() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        User user = new User();
+        user.setAge(20);
+        user.setId("1");
+        Map<String, Object> objectMap = new HashMap<>();
+        objectMap.put("check", true);
+
+        User updatedUser = (User) PatchMap.patch(objectMap, user);
+        Assert.assertTrue(updatedUser.isCheck());
+    }
 
 }
